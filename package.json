@@ -12,11 +12,14 @@
     "test:advanced": "vitest src/advanced",
     "test:ui": "vitest --ui",
     "build": "tsc -b && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "start:advanced": "REACT_APP_MODE=advanced vite serve --open ./index.refactoring.html",
+    "start:api-mock": "json-server --watch db.json --port 3001"
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "json-server": "^0.17.4"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.2",
