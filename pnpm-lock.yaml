@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      json-server:
-        specifier: ^0.17.4
-        version: 0.17.4
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -57,6 +54,9 @@ importers:
       jsdom:
         specifier: ^26.0.0
         version: 26.0.0
+      json-server:
+        specifier: ^0.17.4
+        version: 0.17.4
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
