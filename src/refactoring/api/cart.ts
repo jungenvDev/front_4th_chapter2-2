@@ -10,27 +10,27 @@ export const getCart = async () => {
 };
 
 //post cart
-export const postCart = async (cart: CartItem[]) => {
-  console;
+export const postCart = async (cart: CartItem) => {
+  const cartWithIds = {
+    ...cart,
+    id: `${cart.product.id}`,
+  };
+
   const response = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(cart),
+    body: JSON.stringify(cartWithIds),
   });
   return response.json();
 };
 
 //edit cart
-export const editCart = async (cart: CartItem[]) => {
+export const editCart = async (productId: string, cart: CartItem) => {
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/cart`);
-    const currentCart = await response.json();
-    const lastId = currentCart.length;
-
     // PUT 요청
-    const updateResponse = await fetch(`${import.meta.env.VITE_API_URL}/cart/${lastId}`, {
+    const updateResponse = await fetch(`${import.meta.env.VITE_API_URL}/cart/${productId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -49,11 +49,14 @@ export const editCart = async (cart: CartItem[]) => {
   }
 };
 //delete cart
-export const deleteCart = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/cart`, {
+export const deleteCart = async (productId: string): Promise<void> => {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/cart/${productId}`, {
     method: 'DELETE',
   });
-  return response.json();
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 };
 
 //useGetCart
